@@ -1,0 +1,152 @@
+[
+  {
+    "id": 1,
+    "language": "JavaScript",
+    "category": "Bucles",
+    "code": "const arr = [10, 20, 30];\nfor (let i = 0; i <= arr.length; i++) {\n  console.log(arr[i]);\n}",
+    "question": "¿Cuál es el error lógico en este bucle?",
+    "options": [
+      "La condición debería ser i < arr.length",
+      "La variable i debería iniciar en 1",
+      "Falta un punto y coma después del bucle",
+      "El método console.log está escrito incorrectamente"
+    ],
+    "correct": 0,
+    "explanation": "Con i <= arr.length, cuando i llega a 3 (igual a arr.length), arr[3] es undefined porque los índices van de 0 a 2."
+  },
+  {
+    "id": 2,
+    "language": "JavaScript",
+    "category": "Condicionales",
+    "code": "let temperatura = 0;\nif (temperatura = 100) {\n  console.log(\"Agua hirviendo\");\n}",
+    "question": "¿Qué problema tiene este condicional?",
+    "options": [
+      "Se usa = (asignación) en lugar de === (comparación)",
+      "La variable temperatura no está declarada correctamente",
+      "Falta un else para manejar el caso contrario",
+      "El número 100 debería estar entre comillas"
+    ],
+    "correct": 0,
+    "explanation": "El operador = asigna el valor 100 a temperatura dentro del if, lo que siempre evalúa como verdadero. Debería usarse === para comparar."
+  },
+  {
+    "id": 3,
+    "language": "Python",
+    "category": "Recursión",
+    "code": "def factorial(n):\n    if n == 0:\n        return 0\n    return n * factorial(n - 1)",
+    "question": "¿Cuál es el error en esta función recursiva?",
+    "options": [
+      "El caso base debería retornar 1, no 0",
+      "La función debería llamarse a sí misma con n + 1",
+      "Falta un parámetro adicional en la función",
+      "El operador de multiplicación está incorrecto"
+    ],
+    "correct": 0,
+    "explanation": "El factorial de 0 es 1, no 0. Con return 0 en el caso base, toda la recursión siempre dará 0 como resultado final."
+  },
+  {
+    "id": 4,
+    "language": "JavaScript",
+    "category": "Lógica booleana",
+    "code": "function esAdulto(edad) {\n  if (edad > 18 && edad < 18) {\n    return true;\n  }\n  return false;\n}",
+    "question": "¿Por qué esta función siempre retorna false?",
+    "options": [
+      "La condición edad > 18 && edad < 18 es imposible de cumplir",
+      "Falta un return true al final de la función",
+      "El operador && debería ser || para comparar rangos",
+      "La función necesita recibir más parámetros"
+    ],
+    "correct": 0,
+    "explanation": "Un número no puede ser mayor Y menor que 18 al mismo tiempo. La condición siempre es falsa. Debería ser edad >= 18."
+  },
+  {
+    "id": 5,
+    "language": "Python",
+    "category": "Bucles",
+    "code": "numeros = [1, 2, 3, 4, 5]\ntotal = 0\nfor n in numeros:\n    total = n\nprint(total)",
+    "question": "¿Qué error lógico tiene este código que intenta calcular la suma?",
+    "options": [
+      "Se usa = en lugar de += para acumular la suma",
+      "El bucle debería usar range() en lugar de la lista directamente",
+      "La variable total debería iniciar en 1 para sumar correctamente",
+      "Falta un return al final del código"
+    ],
+    "correct": 0,
+    "explanation": "Con total = n se reemplaza el valor en cada iteración. Debería ser total += n para acumular. Al final solo guarda el último elemento (5)."
+  },
+  {
+    "id": 6,
+    "language": "JavaScript",
+    "category": "Condicionales",
+    "code": "function clasificar(nota) {\n  if (nota >= 90) return \"Excelente\";\n  if (nota >= 70) return \"Aprobado\";\n  if (nota >= 90) return \"Sobresaliente\";\n  return \"Reprobado\";\n}",
+    "question": "¿Cuál es el problema lógico en esta función?",
+    "options": [
+      "La tercera condición es código muerto, nunca se ejecuta",
+      "Las condiciones deberían compararse con <= en lugar de >=",
+      "Falta una condición para notas entre 70 y 89",
+      "El orden de las condiciones está completamente correcto"
+    ],
+    "correct": 0,
+    "explanation": "La tercera condición (nota >= 90) nunca se alcanza porque si nota >= 90, ya retornó 'Excelente' antes. Es código inalcanzable (dead code)."
+  },
+  {
+    "id": 7,
+    "language": "Python",
+    "category": "Listas",
+    "code": "def duplicar(lista):\n    for i in range(len(lista)):\n        lista[i] = lista[i] * 2\n    return lista\n\noriginal = [1, 2, 3]\nresultado = duplicar(original)\nprint(original)",
+    "question": "¿Qué problema ocurre al imprimir original después de llamar a duplicar()?",
+    "options": [
+      "La función modifica la lista original en lugar de crear una copia",
+      "La función no retorna la lista correctamente",
+      "El operador * 2 no funciona correctamente con listas en Python",
+      "Debería usarse while en lugar de for para iterar la lista"
+    ],
+    "correct": 0,
+    "explanation": "Las listas en Python se pasan por referencia. Al modificar lista[i] dentro de la función, también se modifica original. Debería hacerse una copia: lista = lista[:]."
+  },
+  {
+    "id": 8,
+    "language": "JavaScript",
+    "category": "Bucles",
+    "code": "let i = 10;\nwhile (i > 0) {\n  console.log(i);\n  i++;\n}",
+    "question": "¿Qué problema causa este bucle while?",
+    "options": [
+      "i++ incrementa en lugar de decrementar, causando un bucle infinito",
+      "La condición debería ser i >= 0 para incluir el cero",
+      "Falta un break al final del cuerpo del bucle",
+      "console.log no puede usarse dentro de un while en JavaScript"
+    ],
+    "correct": 0,
+    "explanation": "Con i++ el valor de i nunca llegará a 0 ya que siempre crece (11, 12, 13...). La condición i > 0 siempre será verdadera. Debería usarse i-- para decrementar."
+  },
+  {
+    "id": 9,
+    "language": "Python",
+    "category": "Funciones",
+    "code": "def saludar(nombre=\"Mundo\", mensaje):\n    print(f\"Hola {nombre}, {mensaje}\")\n\nsaludar(mensaje=\"buenos días\")",
+    "question": "¿Cuál es el error en la definición de esta función?",
+    "options": [
+      "Los parámetros con valor por defecto deben ir al final",
+      "No se puede usar f-strings con parámetros de función en Python",
+      "La función debería retornar el saludo en lugar de imprimirlo",
+      "El parámetro mensaje necesita especificar un tipo de dato"
+    ],
+    "correct": 0,
+    "explanation": "En Python, los parámetros con valor por defecto (nombre='Mundo') deben declararse DESPUÉS de los sin valor por defecto. Lo correcto es: def saludar(mensaje, nombre='Mundo')."
+  },
+  {
+    "id": 10,
+    "language": "JavaScript",
+    "category": "Arrays",
+    "code": "const nums = [3, 1, 10, 9, 2];\nconst mayor = nums.sort()[nums.length - 1];\nconsole.log(mayor); // muestra 9, no 10",
+    "question": "¿Por qué sort() no encuentra correctamente el número mayor?",
+    "options": [
+      "sort() ordena como texto por defecto: '10' < '9' como string",
+      "El índice nums.length - 1 accede fuera del arreglo",
+      "sort() no puede usarse con números en JavaScript",
+      "Debería usarse Math.max() en lugar de sort()"
+    ],
+    "correct": 0,
+    "explanation": "Array.sort() sin parámetros compara como cadenas. '10' viene antes que '9' lexicográficamente, así que 9 queda al final. Para ordenar números: nums.sort((a, b) => a - b)."
+  }
+]
