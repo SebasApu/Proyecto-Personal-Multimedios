@@ -1,16 +1,61 @@
-# React + Vite
+# Bug Detector — Quiz de Lógica en Código
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Proyecto Personal | IF7102 Multimedios | I Ciclo 2026 | UCR
 
-Currently, two official plugins are available:
+## Descripción
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+**Bug Detector** es un quiz interactivo donde el usuario debe identificar errores lógicos en fragmentos de código JavaScript y Python. El juego incluye temporizador por pregunta, retroalimentación inmediata con explicación del error, y pantalla de resultados con estadísticas.
 
-## React Compiler
+**Opción elegida:** Opción 5 — Juego Educativo de Un Nivel  
+**Framework:** React 19 + Vite  
+**Modalidad:** Quiz con temporizador (20 segundos por pregunta)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Estructura de componentes
 
-## Expanding the ESLint configuration
+```
+src/
+├── App.jsx                  # Componente raíz — maneja estado global del juego
+├── App.css                  # Estilos globales de la aplicación
+├── index.css                # Variables CSS y reset base
+├── main.jsx                 # Punto de entrada de React
+└── components/
+    ├── StartScreen.jsx      # Pantalla de inicio
+    ├── GameScreen.jsx       # Pantalla del juego (timer + pregunta)
+    ├── ResultScreen.jsx     # Pantalla de resultados
+    ├── QuestionCard.jsx     # Tarjeta reutilizable de pregunta + opciones
+    └── Timer.jsx            # Componente de temporizador visual
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Cómo ejecutar
+
+```bash
+npm install
+npm run dev
+```
+
+Luego abrir `http://localhost:5173` en el navegador.
+
+## Recursos multimedia
+
+Colocar los archivos de audio en `public/sounds/`:
+
+| Archivo         | Descripción                    | Fuente               |
+|-----------------|--------------------------------|----------------------|
+| `correct.mp3`   | Sonido de respuesta correcta   | Freesound.org (CC0)  |
+| `wrong.mp3`     | Sonido de respuesta incorrecta | Freesound.org (CC0)  |
+| `finish.mp3`    | Fanfarria al terminar el quiz  | Freesound.org (CC0)  |
+
+Los sonidos son opcionales — la aplicación funciona sin ellos.
+
+## Datos del juego
+
+Las preguntas se cargan dinámicamente desde `public/data/questions.json` usando `fetch()`. El archivo contiene 10 preguntas sobre errores lógicos comunes en JavaScript y Python, con categorías: Bucles, Condicionales, Recursión, Lógica booleana, Funciones y Arrays.
+
+## Framework
+
+**React 19** con hooks. Conceptos aplicados:
+- `useState` — estado del juego (pantalla activa, puntuación, índice)
+- `useEffect` — carga del JSON y lógica del temporizador
+- `useCallback` — handler del timeout del timer
+- Props para comunicación entre componentes padre e hijo
+- Renderizado condicional (`{screen === 'game' && <GameScreen />}`)

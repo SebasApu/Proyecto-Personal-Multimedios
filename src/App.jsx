@@ -1,121 +1,103 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
+import { useState, useEffect } from 'react'
+import StartScreen  from './components/StartScreen'
+import GameScreen   from './components/GameScreen'
+import ResultScreen from './components/ResultScreen'
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+const QUESTIONS_PER_GAME = 10
 
-  return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+function shuffleArray(arr) {
+  const copy = [...arr]
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[copy[i], copy[j]] = [copy[j], copy[i]]
+  }
+  return copy
 }
 
-export default App
+function shuffleOptions(question) {
+  const indices = [0, 1, 2, 3]
+  for (let i = indices.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[indices[i], indices[j]] = [indices[j], indices[i]]
+  }
+  return {
+    ...question,
+    options: indices.map(i => question.options[i]),
+    correct: indices.indexOf(question.correct),
+  }
+}
+
+function pickRandom(bank) {
+  return shuffleArray(bank).slice(0, QUESTIONS_PER_GAME).map(shuffleOptions)
+}
+
+export default function App() {
+  const [screen,       setScreen]       = useState('start')
+  const [bank,         setBank]         = useState([])
+  const [questions,    setQuestions]    = useState([])
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [score,        setScore]        = useState(0)
+  const [correct,      setCorrect]      = useState(0)
+  const [loading,      setLoading]      = useState(true)
+
+  useEffect(() => {
+    fetch('/data/questions.json')
+      .then(r => r.json())
+      .then(data => { setBank(data); setLoading(false) })
+      .catch(() => setLoading(false))
+  }, [])
+
+  const handleStart = () => {
+    setQuestions(pickRandom(bank))
+    setCurrentIndex(0)
+    setScore(0)
+    setCorrect(0)
+    setScreen('game')
+  }
+
+  const handleAnswer = (isCorrect) => {
+    if (isCorrect) {
+      setScore(s => s + 10)
+      setCorrect(c => c + 1)
+    }
+  }
+
+  const handleNext = () => {
+    if (currentIndex < questions.length - 1) {
+      setCurrentIndex(i => i + 1)
+    } else {
+      setScreen('result')
+    }
+  }
+
+  const handleRestart = () => setScreen('start')
+
+  if (loading) return <div className="loading">Cargando preguntas</div>
+
+  return (
+    <div className="app">
+      {screen === 'start' && (
+        <StartScreen onStart={handleStart} total={QUESTIONS_PER_GAME} bankSize={bank.length} />
+      )}
+      {screen === 'game' && questions.length > 0 && (
+        <GameScreen
+          question={questions[currentIndex]}
+          currentIndex={currentIndex}
+          total={questions.length}
+          score={score}
+          onAnswer={handleAnswer}
+          onNext={handleNext}
+        />
+      )}
+      {screen === 'result' && (
+        <ResultScreen
+          score={score}
+          total={questions.length}
+          correct={correct}
+          onRestart={handleRestart}
+        />
+      )}
+    </div>
+  )
+}
