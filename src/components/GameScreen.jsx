@@ -6,7 +6,7 @@ const TIME_LIMIT = 30
 
 function playSound(type) {
   const paths = {
-    correct: '/sounds/correct.mp3',
+    correct: '/sounds/correct.wav',
     wrong: '/sounds/wrong.mp3',
     finish: '/sounds/finish.mp3',
   }

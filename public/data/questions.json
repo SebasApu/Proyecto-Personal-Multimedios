@@ -6,12 +6,12 @@
     "code": "const arr = [10, 20, 30];\nfor (let i = 0; i <= arr.length; i++) {\n  console.log(arr[i]);\n}",
     "question": "¿Cuál es el error lógico en este bucle?",
     "options": [
-      "La condición debería ser i < arr.length",
       "La variable i debería iniciar en 1",
       "Falta un punto y coma después del bucle",
+      "La condición debería ser i < arr.length",
       "El método console.log está escrito incorrectamente"
     ],
-    "correct": 0,
+    "correct": 2,
     "explanation": "Con i <= arr.length, cuando i llega a 3 (igual a arr.length), arr[3] es undefined porque los índices van de 0 a 2."
   },
   {
@@ -21,28 +21,28 @@
     "code": "let temperatura = 0;\nif (temperatura = 100) {\n  console.log(\"Agua hirviendo\");\n}",
     "question": "¿Qué problema tiene este condicional?",
     "options": [
-      "Se usa = (asignación) en lugar de === (comparación)",
       "La variable temperatura no está declarada correctamente",
+      "Se usa = (asignación) en lugar de === (comparación)",
       "Falta un else para manejar el caso contrario",
       "El número 100 debería estar entre comillas"
     ],
-    "correct": 0,
+    "correct": 1,
     "explanation": "El operador = asigna el valor 100 a temperatura dentro del if, lo que siempre evalúa como verdadero. Debería usarse === para comparar."
   },
   {
     "id": 3,
-    "language": "Python",
-    "category": "Recursión",
-    "code": "def factorial(n):\n    if n == 0:\n        return 0\n    return n * factorial(n - 1)",
-    "question": "¿Cuál es el error en esta función recursiva?",
+    "language": "Laravel",
+    "category": "Rutas",
+    "code": "// web.php\nRoute::get('/productos/{id}', [ProductoController::class, 'show']);\nRoute::get('/productos/crear', [ProductoController::class, 'crear']);",
+    "question": "¿Por qué la ruta /productos/crear nunca funciona correctamente?",
     "options": [
-      "El caso base debería retornar 1, no 0",
-      "La función debería llamarse a sí misma con n + 1",
-      "Falta un parámetro adicional en la función",
-      "El operador de multiplicación está incorrecto"
+      "El controller está referenciado incorrectamente",
+      "La ruta dinámica {id} captura 'crear' antes de llegar a la segunda ruta",
+      "Los nombres de rutas deben escribirse en inglés",
+      "Falta definir el método POST para crear productos"
     ],
-    "correct": 0,
-    "explanation": "El factorial de 0 es 1, no 0. Con return 0 en el caso base, toda la recursión siempre dará 0 como resultado final."
+    "correct": 1,
+    "explanation": "Laravel evalúa rutas en orden de definición. Como /productos/{id} va primero, 'crear' es capturado como el valor de {id}. Las rutas estáticas deben definirse ANTES de las dinámicas."
   },
   {
     "id": 4,
@@ -51,28 +51,28 @@
     "code": "function esAdulto(edad) {\n  if (edad > 18 && edad < 18) {\n    return true;\n  }\n  return false;\n}",
     "question": "¿Por qué esta función siempre retorna false?",
     "options": [
-      "La condición edad > 18 && edad < 18 es imposible de cumplir",
       "Falta un return true al final de la función",
       "El operador && debería ser || para comparar rangos",
-      "La función necesita recibir más parámetros"
+      "La función necesita recibir más parámetros",
+      "La condición edad > 18 && edad < 18 es imposible de cumplir"
     ],
-    "correct": 0,
-    "explanation": "Un número no puede ser mayor Y menor que 18 al mismo tiempo. La condición siempre es falsa. Debería ser edad >= 18."
+    "correct": 3,
+    "explanation": "Un número no puede ser mayor Y menor que 18 al mismo tiempo. La condición siempre es falsa. Debería ser: edad >= 18."
   },
   {
     "id": 5,
-    "language": "Python",
-    "category": "Bucles",
-    "code": "numeros = [1, 2, 3, 4, 5]\ntotal = 0\nfor n in numeros:\n    total = n\nprint(total)",
-    "question": "¿Qué error lógico tiene este código que intenta calcular la suma?",
+    "language": "Laravel",
+    "category": "Eloquent",
+    "code": "$posts = Post::all();\nforeach ($posts as $post) {\n    echo $post->author->name . \"\\n\";\n}",
+    "question": "¿Qué problema de rendimiento tiene este código?",
     "options": [
-      "Se usa = en lugar de += para acumular la suma",
-      "El bucle debería usar range() en lugar de la lista directamente",
-      "La variable total debería iniciar en 1 para sumar correctamente",
-      "Falta un return al final del código"
+      "Post::all() no puede usarse con relaciones en Eloquent",
+      "La relación debería llamarse 'user' en lugar de 'author'",
+      "Se ejecuta una query por cada post para obtener el autor (problema N+1)",
+      "Falta llamar ->get() después de Post::all()"
     ],
-    "correct": 0,
-    "explanation": "Con total = n se reemplaza el valor en cada iteración. Debería ser total += n para acumular. Al final solo guarda el último elemento (5)."
+    "correct": 2,
+    "explanation": "Con Post::all() se hace 1 query, pero $post->author dispara una query adicional por cada post. La solución es usar eager loading: Post::with('author')->get()."
   },
   {
     "id": 6,
@@ -81,28 +81,28 @@
     "code": "function clasificar(nota) {\n  if (nota >= 90) return \"Excelente\";\n  if (nota >= 70) return \"Aprobado\";\n  if (nota >= 90) return \"Sobresaliente\";\n  return \"Reprobado\";\n}",
     "question": "¿Cuál es el problema lógico en esta función?",
     "options": [
+      "Las notas deberían compararse con <= en lugar de >=",
       "La tercera condición es código muerto, nunca se ejecuta",
-      "Las condiciones deberían compararse con <= en lugar de >=",
       "Falta una condición para notas entre 70 y 89",
       "El orden de las condiciones está completamente correcto"
     ],
-    "correct": 0,
+    "correct": 1,
     "explanation": "La tercera condición (nota >= 90) nunca se alcanza porque si nota >= 90, ya retornó 'Excelente' antes. Es código inalcanzable (dead code)."
   },
   {
     "id": 7,
-    "language": "Python",
-    "category": "Listas",
-    "code": "def duplicar(lista):\n    for i in range(len(lista)):\n        lista[i] = lista[i] * 2\n    return lista\n\noriginal = [1, 2, 3]\nresultado = duplicar(original)\nprint(original)",
-    "question": "¿Qué problema ocurre al imprimir original después de llamar a duplicar()?",
+    "language": "Laravel",
+    "category": "Eloquent",
+    "code": "$user = User::find(1);\nUser::where('id', 1)->update(['email' => 'nuevo@mail.com']);\necho $user->email; // muestra el email anterior",
+    "question": "¿Por qué $user->email sigue mostrando el valor anterior?",
     "options": [
-      "La función modifica la lista original en lugar de crear una copia",
-      "La función no retorna la lista correctamente",
-      "El operador * 2 no funciona correctamente con listas en Python",
-      "Debería usarse while en lugar de for para iterar la lista"
+      "La variable $user en memoria no se actualiza al usar update() con query builder",
+      "User::find(1) no trae todos los campos del modelo",
+      "El método update() solo funciona sobre instancias del modelo directamente",
+      "echo no puede mostrar propiedades de modelos Eloquent"
     ],
     "correct": 0,
-    "explanation": "Las listas en Python se pasan por referencia. Al modificar lista[i] dentro de la función, también se modifica original. Debería hacerse una copia: lista = lista[:]."
+    "explanation": "User::where()->update() actualiza la BD pero no modifica el objeto $user en memoria. Para reflejar el cambio hay que llamar $user->refresh() o actualizar directamente sobre el objeto ($user->email = ...; $user->save())."
   },
   {
     "id": 8,
@@ -111,28 +111,28 @@
     "code": "let i = 10;\nwhile (i > 0) {\n  console.log(i);\n  i++;\n}",
     "question": "¿Qué problema causa este bucle while?",
     "options": [
-      "i++ incrementa en lugar de decrementar, causando un bucle infinito",
       "La condición debería ser i >= 0 para incluir el cero",
       "Falta un break al final del cuerpo del bucle",
+      "i++ incrementa en lugar de decrementar, causando un bucle infinito",
       "console.log no puede usarse dentro de un while en JavaScript"
     ],
-    "correct": 0,
+    "correct": 2,
     "explanation": "Con i++ el valor de i nunca llegará a 0 ya que siempre crece (11, 12, 13...). La condición i > 0 siempre será verdadera. Debería usarse i-- para decrementar."
   },
   {
     "id": 9,
-    "language": "Python",
-    "category": "Funciones",
-    "code": "def saludar(nombre=\"Mundo\", mensaje):\n    print(f\"Hola {nombre}, {mensaje}\")\n\nsaludar(mensaje=\"buenos días\")",
-    "question": "¿Cuál es el error en la definición de esta función?",
+    "language": "Laravel",
+    "category": "Blade",
+    "code": "{{-- Vista Blade --}}\n@if(Auth::user()->role === 'admin')\n    <a href=\"/panel\">Panel de Admin</a>\n@endif",
+    "question": "¿Qué error puede ocurrir con esta directiva Blade?",
     "options": [
-      "Los parámetros con valor por defecto deben ir al final",
-      "No se puede usar f-strings con parámetros de función en Python",
-      "La función debería retornar el saludo en lugar de imprimirlo",
-      "El parámetro mensaje necesita especificar un tipo de dato"
+      "El operador === no está soportado dentro de directivas @if en Blade",
+      "Auth::user() solo puede usarse en controladores, no en vistas",
+      "La ruta '/panel' debe definirse primero en web.php",
+      "Si el usuario no está autenticado, Auth::user() retorna null y ->role lanzará un error"
     ],
-    "correct": 0,
-    "explanation": "En Python, los parámetros con valor por defecto (nombre='Mundo') deben declararse DESPUÉS de los sin valor por defecto. Lo correcto es: def saludar(mensaje, nombre='Mundo')."
+    "correct": 3,
+    "explanation": "Si el usuario no ha iniciado sesión, Auth::user() retorna null. Llamar ->role sobre null lanza un TypeError. La solución es usar @auth primero, o Auth::check() antes de acceder a propiedades."
   },
   {
     "id": 10,
@@ -141,12 +141,162 @@
     "code": "const nums = [3, 1, 10, 9, 2];\nconst mayor = nums.sort()[nums.length - 1];\nconsole.log(mayor); // muestra 9, no 10",
     "question": "¿Por qué sort() no encuentra correctamente el número mayor?",
     "options": [
-      "sort() ordena como texto por defecto: '10' < '9' como string",
       "El índice nums.length - 1 accede fuera del arreglo",
+      "sort() ordena como texto por defecto: '10' viene antes que '9' como string",
       "sort() no puede usarse con números en JavaScript",
       "Debería usarse Math.max() en lugar de sort()"
     ],
-    "correct": 0,
+    "correct": 1,
     "explanation": "Array.sort() sin parámetros compara como cadenas. '10' viene antes que '9' lexicográficamente, así que 9 queda al final. Para ordenar números: nums.sort((a, b) => a - b)."
+  },
+  {
+    "id": 11,
+    "language": "Laravel",
+    "category": "Tests",
+    "code": "public function test_login_funciona()\n{\n    $response = $this->post('/login', [\n        'email' => 'user@test.com',\n        'password' => 'wrongpassword',\n    ]);\n\n    $this->assertTrue(true);\n}",
+    "question": "¿Por qué este test es un falso positivo?",
+    "options": [
+      "assertTrue(true) siempre pasa sin verificar el resultado real de la petición",
+      "El test debería usar assertFalse() para verificar credenciales incorrectas",
+      "No se puede testear autenticación con $this->post() en Laravel",
+      "Falta llamar $response->assertStatus() antes del assertTrue"
+    ],
+    "correct": 0,
+    "explanation": "assertTrue(true) siempre es verdadero sin importar qué pasó. El test nunca falla, aunque el login esté roto. Debería verificarse con $response->assertStatus(422) o assertRedirect('/login')."
+  },
+  {
+    "id": 12,
+    "language": "Laravel",
+    "category": "Tests",
+    "code": "class ProductoTest extends TestCase\n{\n    public function test_crear_producto()\n    {\n        Producto::factory()->create(['nombre' => 'Laptop']);\n        $this->assertDatabaseHas('productos', ['nombre' => 'Laptop']);\n    }\n}",
+    "question": "¿Qué problema puede causar este test a lo largo del tiempo?",
+    "options": [
+      "Producto::factory() no puede usarse en tests de tipo TestCase",
+      "assertDatabaseHas solo funciona con la base de datos de producción",
+      "El nombre 'Laptop' puede colisionar con datos de otros tests",
+      "Sin RefreshDatabase, los registros persisten y contaminan otros tests"
+    ],
+    "correct": 3,
+    "explanation": "Sin el trait RefreshDatabase, cada test que crea datos los deja en la base de datos de pruebas. Con el tiempo esto contamina los resultados. Se soluciona agregando: use RefreshDatabase; dentro de la clase."
+  },
+  {
+    "id": 13,
+    "language": "Laravel",
+    "category": "Tests",
+    "code": "public function test_email_bienvenida_enviado()\n{\n    Mail::fake();\n\n    $user = User::factory()->create();\n\n    // Verificación\n    $this->assertDatabaseHas('users', ['email' => $user->email]);\n}",
+    "question": "¿Por qué este test no verifica lo que dice verificar?",
+    "options": [
+      "Mail::fake() impide que el usuario sea creado en la base de datos",
+      "User::factory()->create() no dispara eventos de bienvenida automáticamente",
+      "Solo se verifica que el usuario existe en BD, nunca que el email fue enviado",
+      "assertDatabaseHas no puede usarse junto con Mail::fake()"
+    ],
+    "correct": 2,
+    "explanation": "El test dice verificar el email de bienvenida, pero solo comprueba que el usuario existe en BD. Para verificar el email hay que agregar: Mail::assertSent(BienvenidaMail::class)."
+  },
+  {
+    "id": 14,
+    "language": "Laravel",
+    "category": "Tests",
+    "code": "public function test_formulario_contacto_guardado()\n{\n    $response = $this->post('/contacto', [\n        'nombre' => 'Ana',\n        'mensaje' => 'Hola mundo',\n    ]);\n\n    $response->assertStatus(200);\n}",
+    "question": "¿Por qué este test falla aunque el formulario funcione correctamente?",
+    "options": [
+      "No se puede usar $this->post() para formularios en Laravel",
+      "El status correcto después de un formulario exitoso es 302 (redirect), no 200",
+      "Falta pasar el token CSRF en los datos del formulario",
+      "assertStatus() solo funciona con peticiones GET en tests de Laravel"
+    ],
+    "correct": 1,
+    "explanation": "Después de procesar un formulario exitosamente, Laravel redirige con status 302. El test debería usar $response->assertRedirect('/gracias') o assertStatus(302). El 200 solo ocurre si el controlador retorna una vista directamente."
+  },
+  {
+    "id": 15,
+    "language": "Laravel",
+    "category": "Tests",
+    "code": "public function test_calcula_descuento()\n{\n    $carrito = Mockery::mock(Carrito::class);\n    $carrito->shouldReceive('calcularTotal')\n            ->andReturn(90.00);\n\n    $resultado = $carrito->calcularTotal();\n\n    $this->assertEquals(90.00, $resultado);\n}",
+    "question": "¿Qué problema fundamental tiene este test?",
+    "options": [
+      "Solo verifica que Mockery funciona, no que el código real calcularTotal() es correcto",
+      "Mockery::mock() no puede usarse con clases propias del proyecto",
+      "El valor 90.00 debería compararse con assertEquals usando strings",
+      "Falta llamar Mockery::close() al final del test para limpiar"
+    ],
+    "correct": 0,
+    "explanation": "El test crea un mock que retorna 90.00 y luego verifica que retorna 90.00. Solo prueba que Mockery funciona, no que el método real calcularTotal() calcula correctamente. Para probar la lógica real se debe instanciar la clase real."
+  },
+  {
+    "id": 16,
+    "language": "JavaScript",
+    "category": "Scope",
+    "code": "for (var i = 0; i < 3; i++) {\n  setTimeout(() => {\n    console.log(i);\n  }, 100);\n}\n// Imprime: 3, 3, 3",
+    "question": "¿Por qué imprime 3 tres veces en lugar de 0, 1, 2?",
+    "options": [
+      "setTimeout no puede acceder a variables del for loop",
+      "El callback de setTimeout crea una copia de i en cada iteración",
+      "El operador => no captura el contexto del loop correctamente",
+      "var no tiene scope de bloque; cuando ejecutan los callbacks, i ya vale 3"
+    ],
+    "correct": 3,
+    "explanation": "var tiene scope de función, no de bloque. Las tres funciones de callback comparten la misma variable i. Cuando ejecutan (después del loop), i ya vale 3. La solución es usar let, que sí tiene scope de bloque."
+  },
+  {
+    "id": 17,
+    "language": "JavaScript",
+    "category": "Async",
+    "code": "async function obtenerNombre(id) {\n  const user = fetch(`/api/users/${id}`)\n                 .then(r => r.json());\n  return user.name;\n}",
+    "question": "¿Por qué user.name siempre es undefined?",
+    "options": [
+      "user.name es undefined porque fetch no carga datos de APIs externas",
+      "Falta el await antes de fetch; user es una Promise, no el objeto resuelto",
+      "Las funciones async no pueden usar .then() y await al mismo tiempo",
+      "El template literal para la URL está mal formado"
+    ],
+    "correct": 1,
+    "explanation": "Sin await, fetch retorna una Promise pendiente, no el objeto resuelto. user es una Promise y user.name es undefined. Debe ser: const user = await fetch(...).then(r => r.json())."
+  },
+  {
+    "id": 18,
+    "language": "Laravel",
+    "category": "Eloquent",
+    "code": "// UserController.php\npublic function store(Request $request)\n{\n    $user = User::create($request->all());\n    return response()->json($user);\n}\n\n// User.php — sin $fillable definido",
+    "question": "¿Qué vulnerabilidad de seguridad tiene este código?",
+    "options": [
+      "response()->json() expone datos sensibles del modelo al cliente",
+      "User::create() no puede usarse sin validar el Request primero",
+      "Sin $fillable, cualquier campo del request puede asignarse masivamente (ej: role, is_admin)",
+      "El método store() debería retornar un redirect, no JSON"
+    ],
+    "correct": 2,
+    "explanation": "Sin $fillable en el modelo, Laravel permite asignación masiva de cualquier campo. Un atacante podría enviar campos como 'is_admin=true' o 'role=superadmin' y modificar datos críticos. Siempre se debe definir $fillable con los campos permitidos."
+  },
+  {
+    "id": 19,
+    "language": "JavaScript",
+    "category": "Tipos",
+    "code": "function procesarDato(valor) {\n  if (typeof valor === 'object') {\n    return valor.toString();\n  }\n  return String(valor);\n}\n\nprocesarDato(null); // lanza TypeError",
+    "question": "¿Por qué falla esta función al recibir null?",
+    "options": [
+      "String() no puede convertir objetos nulos en JavaScript",
+      "typeof null retorna 'object' en JavaScript, y null.toString() lanza un TypeError",
+      "La función no puede recibir null como parámetro válido",
+      "El problema está en usar === en lugar de == para comparar tipos"
+    ],
+    "correct": 1,
+    "explanation": "typeof null retorna 'object' — es un bug histórico de JavaScript que no se puede corregir. La función entra al if y ejecuta null.toString(), lo que lanza un TypeError. Se debe agregar una verificación: if (valor !== null && typeof valor === 'object')."
+  },
+  {
+    "id": 20,
+    "language": "Laravel",
+    "category": "Migrations",
+    "code": "// Migration\npublic function up(): void\n{\n    Schema::table('users', function (Blueprint $table) {\n        $table->string('telefono');\n    });\n}\n\n// down() no está definido (método vacío)",
+    "question": "¿Por qué php artisan migrate:rollback no elimina la columna 'telefono'?",
+    "options": [
+      "Schema::table() no soporta rollback, solo Schema::create()",
+      "Las columnas de tipo string no pueden eliminarse con migrate:rollback",
+      "Falta ejecutar php artisan migrate:fresh antes del rollback",
+      "El método down() está vacío; debe incluir dropColumn('telefono') para revertir"
+    ],
+    "correct": 3,
+    "explanation": "El método down() es el responsable de revertir lo que hace up(). Si está vacío, el rollback no hace nada. Debe ser: Schema::table('users', fn($t) => $t->dropColumn('telefono'))."
   }
 ]
