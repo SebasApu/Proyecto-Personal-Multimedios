@@ -57,6 +57,29 @@ export default function GameScreen({ question, currentIndex, total, score, onAns
     onNext()
   }
 
+  useEffect(() => {
+    const onKeyDown = (e) => {
+      if (showResult) {
+        if (e.key === 'Enter') {
+          if (isLast) playSound('finish')
+          onNext()
+        }
+        return
+      }
+      if (selected !== null) return
+      const keyMap = { '1': 0, '2': 1, '3': 2, '4': 3, a: 0, b: 1, c: 2, d: 3 }
+      const idx = keyMap[e.key.toLowerCase()]
+      if (idx === undefined || idx >= question.options.length) return
+      const correct = idx === question.correct
+      setSelected(idx)
+      setShowResult(true)
+      onAnswer(correct)
+      playSound(correct ? 'correct' : 'wrong')
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [selected, showResult, question, onAnswer, onNext, isLast])
+
   return (
     <div className="screen game-screen">
       <div className="game-header">
@@ -88,6 +111,13 @@ export default function GameScreen({ question, currentIndex, total, score, onAns
         <button className="btn-primary btn-next" onClick={handleNext}>
           {isLast ? 'Ver resultados 🏆' : 'Siguiente →'}
         </button>
+      )}
+
+      {!showResult && (
+        <p className="keyboard-hint">Teclado: <kbd>1</kbd>–<kbd>4</kbd> para responder</p>
+      )}
+      {showResult && (
+        <p className="keyboard-hint"><kbd>Enter</kbd> para continuar</p>
       )}
     </div>
   )

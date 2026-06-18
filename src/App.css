@@ -539,6 +539,27 @@
   width: 100%;
 }
 
+/* ─── KEYBOARD HINT ────────────────────────────── */
+
+.keyboard-hint {
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  opacity: 0.6;
+  margin: 0;
+}
+
+.keyboard-hint kbd {
+  display: inline-block;
+  padding: 0.1rem 0.4rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
 /* ─── RESPONSIVE ───────────────────────────────── */
 
 @media (min-width: 600px) {

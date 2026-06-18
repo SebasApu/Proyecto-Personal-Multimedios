@@ -38,6 +38,10 @@ Proyecto Personal IF7102 Multimedios | I Ciclo 2026
   https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/sort  
   Consultado para entender por qué sort() sin parámetros ordena como texto (pregunta 10 del quiz).
 
+- **MDN Web Docs — KeyboardEvent / addEventListener**  
+  https://developer.mozilla.org/es/docs/Web/API/KeyboardEvent  
+  Para capturar eventos de teclado con `window.addEventListener('keydown', ...)` y leer `e.key` para seleccionar opciones con las teclas 1–4 y avanzar con Enter.
+
 ---
 
 ## Tutoriales y recursos de aprendizaje
